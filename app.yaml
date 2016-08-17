@@ -5,4 +5,24 @@ api_version: 1
 
 handlers:
 - url: .*
-  script: main.php
+  script: www/main.php
+
+  # Serve images as static resources.
+- url: /(.+\.(gif|png|jpg))$
+  static_files: \1
+  upload: .+\.(gif|png|jpg)$
+  application_readable: true
+
+  # Serve php scripts.
+- url: /(.+\.php)$
+  script: \1
+
+#from https://cloud.google.com/appengine/docs/python/getting-started/hosting-a-static-website
+- url: /index
+  static_files: www/index.html
+  upload: www/index.html
+
+#from https://cloud.google.com/appengine/docs/python/getting-started/hosting-a-static-website
+- url: /(.*)
+  static_files: www/\1
+  upload: www/(.*)
