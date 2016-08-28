@@ -1,10 +1,28 @@
 application: itservzweb
-version: 2
+version: 4
 runtime: php55
 api_version: 1
+threadsafe: yes
+
+inbound_services:
+# [START mail_service]
+- mail
+# [END mail_service]
+# [START bounce_service]
+- mail_bounce
+# [END bounce_service]
 
 handlers:
-
+# [START incoming_handler]
+- url: /_ah/mail/.+
+  script: handle_incoming_email.php
+  login: admin
+# [END incoming_handler]
+# [START bounce_handler]
+- url: /_ah/bounce
+  script: handle_bounced_email.php
+  login: admin
+# [END bounce_handler]
 - url: /css
   static_dir: css
 - url: /img
