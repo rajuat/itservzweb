@@ -32,8 +32,8 @@ return true;
 use google\appengine\api\mail\Message;
 try {
     $message = new Message();
-    $message->setSender($email_address);
-    $message->addTo($to);
+    $message->setSender("service@itservzweb.appspotmail.com");
+    $message->addTo("service@itservzweb.appspotmail.com");
     $message->setSubject($email_subject);
     $message->setTextBody($email_body);
     //$message->headers($headers)
